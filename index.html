@@ -1,0 +1,436 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hydroGENE</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets\js\jquery.fullPage.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="http://cdn.bio.sh.s3.eu-central-1.amazonaws.com/msa/latest/msa.min.gz.js"></script>
+  <script src="particles.js"></script>
+  <script src="assets\js\jquery.popup.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets\css\jquery.fullPage.css" />
+  <link rel="stylesheet" type="text/css" href="assets\css\style.css" />
+  <link rel="stylesheet" type="text/css" href="assets\css\popup.css" />
+  <link rel="stylesheet" type="text/css" href="assets\css\pushy-buttons.min.css" />
+  <!--CDN links for TweenLite, CSSPlugin, and EasePack-->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/easing/EasePack.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+
+</head>
+
+<body>
+  <div id="particle"></div>
+
+  <div class="overlay container-fluid">
+    <div class="row">
+      <div class="col-md-2 left-col">
+        <img src="" alt="">
+        <img id="logo" src="assets\img\LOGO2.png">
+        <p id="cap">Bioinformatics Platform</p>
+        <div class="nav">
+          <ul>
+            <li id="alignment">Alignment</li>
+            <li id="navigation">Navigation</li>
+            <li id="learn">Learn</li>
+            <li id="about-us">About</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fullpage col-md-10">
+        <div class="section" id="vue-app">
+          <div id="unique-heading">
+            <h1>Input Sequence</h1>
+            <p>Provide the required sequence(s) for alignment or manipulation.</p>
+            <p>{{job}}</p>
+          </div>
+
+          <div class="container-fluid main alignment">
+            <div class="row" v-if="!result && !advanced && !loading">
+              <div class="col-md-2">
+                <label for="job">Enter a Job Name</label>
+                <input type="text" name="job" placeholder="Job Name" v-model="job">
+              </div>
+              <div class="col-md-2">
+                <label for="job">Alignment Algorithm</label>
+                <select v-model="selected" v-bind:class="{alignmentSelected: alignmentSelected}" id="algo" >
+                  <option selected>hydroGene Bitwise Alignment</option>
+                  <option>Dynamic Programming Algorithm</option>
+                  <option>Word Method Algorithm</option>
+                  <option selected>hydroGene Bitwise Alignment Optimized</option>
+                </select>
+              </div>
+
+              <div id="warning" v-show="warning">
+                <p>Please Check an Alignment Algorithm to be used</p>
+              </div>
+
+            </div>
+            <div v-if="!result && !advanced && !loading">
+              <textarea name="sequence" rows="8" cols="80" v-model.trim="seq" placeholder="Enter 2 Sequences separated by a line break" class="text-uppercase"></textarea>
+              <p class="hint"><a href="https://en.m.wikipedia.org/wiki/FASTA_format?pw=350&ph=450" class="popup">Don't know what's a FASTA format?</a></p>
+              <button type="button" class="btn btn-primary" v-on:click="expert()">Various Options</button>
+              <button class="next btn btn--sm btn--blue" v-on:click="send()">Align</button>
+            </div>
+
+            <div id="results" v-show="result">
+              <p>Alignment Finished, thanks for waiting.</p>
+
+              <div id="menuDiv">
+
+              </div>
+              <div id="msaResult">
+
+              </div>
+
+              <p>Number of Matches is: {{numberOfMatches}}</p>
+              <p v-show="dp">Score: {{score}}</p>
+
+              <button type="button" name="button" v-on:click="another()">Another Alignment</button>
+            </div>
+
+            <div id="results" v-show="loading">
+
+              <h1>Loading ...</h1>
+            </div>
+
+
+            <div id="advanced" v-show="advanced">
+
+              <textarea name="sequence" rows="4" cols="50" v-model.trim="expertSeq" placeholder="Enter a sequence for Manipulation" class="text-uppercase"></textarea>
+
+              <div class="btnRow">
+                <button class="btn btn-info btn-sm" type="button" name="button" v-on:click="checkType()">Check Type</button>
+                <button class="btn btn-info btn-sm" type="button" name="button" v-on:click="translate()">Convert to Protein</button>
+                <button class="btn btn-info btn-sm" type="button" name="button" v-on:click="codon()">Codon</button>
+                <button class="btn btn-info btn-sm" type="button" name="button" v-on:click="introns()">Remove Introns</button>
+              </div>
+
+              <div class="row">
+                <div class=".col-xs-12">
+                  <p id="resultParagraph">
+                    {{expertResult}}
+                   </p>
+                </div>
+              </div>
+
+
+              <button id="advanced-btn" class="btn btn-primary btn-lg" type="button" name="button" v-on:click="another()">Back to Alignment</button>
+            </div>
+          </div>
+        </div>
+        <div class="section" id="vue-database">
+          <div class="slide" id="particles-js">
+            <div class="heading">
+              <h1>Database Navigation</h1>
+              <p>Navigate EMBL-NCBI databases online.</p>
+            </div>
+            <div class="container-fluid main">
+              <form action="">
+                <p>Select a Database to view</p>
+                <select class="db-nav" name="databases" v-model="database">
+                                  <option v-for="db in search">{{db}}</option>
+                                </select>
+                                <input type="text" name="" value="" placeholder="Search Terms .. " v-model="terms">
+                                <p class="hint"><a href="https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly?pw=350&ph=450" class="popup sTerm">Don't know what a search term is?</a></p>
+                <p class="know"> <a href="https://en.m.wikipedia.org/wiki/National_Center_for_Biotechnology_Information?pw=350&ph=450" class="popup">?</a></p>
+                <button id="navigation-btn" v-on:click="navigate()">Navigate</button>
+              </form>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="heading">
+              <h1>{{database}} Database</h1>
+              <p>You are now viewing {{database}} Database.</p>
+              <p>Number of sequences retreived: {{results.length}}</p>
+            </div>
+            <div class="container-fluid main tableContent">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>Sequence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template v-for="(res, index) in results">
+                                      <tr>
+                                      <td>
+                                          {{res.id}}
+                                      </td>
+                                      <td class="table-seq">
+                                          <p class="narrow">{{res.seq}}</p>
+                                      </td>
+                                      </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="section" id="vue-learn">
+          <div class="slide">
+            <div class="heading">
+              <h1>Learn</h1>
+              <p>Let's learn about Bioinformatics.</p>
+            </div>
+            <div class="container-fluid main">
+              <div class="row">
+                <h3 class="centerd">Choose your skill level</h3>
+                <div class="col-md-5">
+                  <img src="assets\img\Biology.jpg" class="img-responsive" alt="Responsive image">
+                  <button id="bio-btn">Biology</button>
+                </div>
+                <div class="col-md-5">
+                  <img src="assets\img\Cs.jpg" class="img-responsive" alt="Responsive image">
+                  <button id="cs-btn">Computer Science</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide" data-anchor="bio" id="biology">
+            <div class="heading">
+              <h1>Biology</h1>
+            </div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-3">
+                  <img alt="140x140" data-src="assets\img\Sequence.png" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
+                </div>
+                <div class="col-xs-9">
+                  <p class="text-primary text-left">What is a Sequence?</p>
+                  <p class="text-muted text-left"> The precise order of nucleotides within a DNA molecule. It includes any method or technology that is used to determine the order of the four bases—adenine, guanine, cytosine, and thymine—in a strand of DNA.</p>
+                <p> <a href="https://en.m.wikipedia.org/wiki/Sequence_alignment?pw=350&ph=450" class="popup">Read More</a></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <img alt="140x140" data-src="assets\img\Genome.png" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
+                </div>
+                <div class="col-xs-9">
+                  <p class="text-primary text-left">What is a Genome?</p>
+                  <p class="text-muted text-left">In modern molecular biology and genetics, a genome is the genetic material of an organism. It consists of DNA (or RNA in RNA viruses).</p>
+                <p> <a href="https://en.m.wikipedia.org/wiki/Genome?pw=350&ph=450" class="popup">Read More</a></p>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <img alt="140x140" data-src="holder.js/140x140" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
+                </div>
+                <div class="col-xs-9">
+                  <p class="text-primary text-left">What are the Applications of Sequence Alignment</p>
+                  <p class="text-muted text-left">In this video we'll cover a second problem to whet your appetite for things to come, namely the problem of sequence alignment. So this is a fundamental problem in computational genomics.</p>
+                <p> <a href="https://www.coursera.org/learn/algorithms-greedy/lecture/ekVkk/application-sequence-alignment?pw=350&ph=450" class="popup">Read More</a></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide" data-anchor="cs">
+            <div class="heading">
+              <h1>Computer Science</h1>
+            </div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-3">
+                  <img alt="140x140" data-src="assets\img\Needle.png" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
+                </div>
+                <div class="col-xs-9">
+                  <p class="text-primary text-left">Needleman-Wunch Algorithm</p>
+                  <p class="text-muted text-left"> The Needleman–Wunsch algorithm is an algorithm used in bioinformatics to align protein or nucleotide sequences. It was one of the first applications of dynamic programming to compare biological sequences.</p>
+                <p> <a href="https://en.m.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm?pw=350&ph=450" class="popup">Read More</a></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3">
+                  <img alt="140x140" data-src="assets\img\mas.gif" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
+                </div>
+                <div class="col-xs-9">
+                  <p class="text-primary text-left">Word Method Alignment</p>
+                  <p class="text-muted text-left">Word methods, also known as k-tuple methods, are heuristic methods that are not guaranteed to find an optimal alignment solution, but are significantly more efficient than dynamic programming.</p>
+                <p> <a href="https://en.m.wikipedia.org/wiki/Sequence_alignment?pw=350&ph=450" class="popup">Read More</a></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section" id="vue-about">
+          <div class="heading">
+            <h1>About Us</h1>
+          </div>
+          <div class="container-fluid main">
+            <p> {{message}} </p>
+            <h1 id="logo-about">H</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="assets\js\app.js"></script> -->
+  <script src="app.js"></script>
+  <script src="assets\js\jquery.popup.min.js"></script>
+
+  <script>
+    var optionss = {};
+    $('a.popup').popup(optionss);
+
+    var options = {
+      "particles": {
+        "number": {
+          "value": 38,
+          "density": {
+            "enable": true,
+            "value_area": 1025.8919341219544
+          }
+        },
+        "color": {
+          "value": "#ffffff"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          },
+          "image": {
+            "src": "img/github.svg",
+            "width": 100,
+            "height": 100
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 6,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "repulse"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 400,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    };
+    particlesJS("particle", options);
+
+    $('.fullpage').fullpage({
+      anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
+    });
+    $(document).on('click', '#alignment', function() {
+      $.fn.fullpage.moveTo('page1');
+    });
+
+    $(document).on('click', '#navigation', function() {
+      $.fn.fullpage.moveTo('page2');
+    });
+
+    $(document).on('click', '#navigation-btn', function() {
+      $.fn.fullpage.moveTo('page2', '1');
+    });
+
+    $(document).on('click', '#learn', function() {
+      $.fn.fullpage.moveTo('page3');
+    });
+
+    $(document).on('click', '#bio-btn', function() {
+      $.fn.fullpage.moveTo('page3', 'bio');
+    });
+
+    $(document).on('click', '#cs-btn', function() {
+      $.fn.fullpage.moveTo('page3', 'cs');
+    });
+
+
+    $(document).on('click', '#about-us', function() {
+      $.fn.fullpage.moveTo('page4');
+    });
+
+    $(document).on('click', '#contact-us', function() {
+      $.fn.fullpage.moveTo('page5');
+    });
+  </script>
+
+</body>
+
+</html>

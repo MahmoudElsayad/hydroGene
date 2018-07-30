@@ -1,0 +1,604 @@
+body {
+    background-color: #252525;
+}
+
+* {
+  transition-duration: 1s;
+}
+
+h1, p, label, td, thead {
+    color: white;
+}
+
+textarea {
+  text-transform: uppercase;
+}
+
+
+
+
+
+#hydrogeneLogo {
+    position: relative;
+    top: 40%;
+    left: 29%;
+    font-size: 7rem;
+    background: #252525;
+    text-align: center;
+    width: 38%;
+}
+
+#hydrogeneLogo:hover {
+    background: #00ff7f;
+    width: 38%;
+    height: 13%;
+    top: 37%;
+    color: #252525;
+}
+
+#hydrogenCaption {
+    position: absolute;
+    top: 55%;
+    text-align: center;
+    left: 31%;
+    color: white;
+  }
+
+  #hydrogenCaption h2 {
+    font-size: 2rem;
+    line-height: 27px;
+    letter-spacing: 3px;
+    left: 33%;
+  }
+
+
+  #index {
+    border-style: none;
+    border-radius: 73%;
+    background-color: #00ff7f;
+    width: 10%;
+    height: 44px;
+    margin-top: 10%;
+}
+
+#particle {
+  background-color: #252525;
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:0;
+}
+
+#overlay {
+  position:relative;
+}
+
+.left-col {
+  height: 102%;
+background-color: rgb(255, 255, 255);
+margin-top: -2%;
+
+}
+
+#logo {
+  color: #252525;
+font-size: 8em;
+position: relative;
+top: 13%;
+left: 19%;
+max-width: 100%;
+
+}
+
+.right-content {
+    position: relative;
+    left: 5%;
+    margin-top: 3%;
+}
+
+.nav * {
+    transition-duration: 1s;
+}
+
+.nav {
+    position: fixed;
+    top: 43%;
+    left: 1%;
+}
+
+.nav li {
+    margin-top: 10%;
+    list-style: none;
+    text-align: left;
+    color: #252525;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.nav li:hover {
+    color: #00ff7f;
+    transition-duration: 1s;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    transform: scale(1.2);
+    background-color: #252525;
+    padding: 5px;
+}
+
+.heading {
+    position: relative;
+    top: 10%;
+    left: 6%;
+    margin-bottom: 5%;
+}
+
+.heading h1 {
+    letter-spacing: 6px;
+}
+
+.container-fluid.main {
+    position: relative;
+    left: 5%;
+    top: 5%;
+    height: 64%;
+    overflow: hidden;
+}
+
+
+/* ALIGNMENT STYLES */
+
+#vue-app {
+    margin-left: 8%;
+}
+
+#vue-app #unique-heading{
+  position: relative;
+top: 10%;
+margin-bottom: 5%;
+    left: -2% !important;
+}
+
+
+.alignment input, select {
+    display: block;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    height: 7%;
+    transition-duration: 1s;
+
+}
+
+input:focus , select:focus {
+    background-color: #252525b3;
+    border: solid 1px;
+    color: #00ff7f;
+    transition-duration: 1s;
+}
+
+
+.alignment label {
+    margin-left: 1%;
+}
+
+.alignment textarea {
+    margin-bottom: 2%;
+    margin-top: 1%;
+    width: 75%;
+    transition-duration: 1s;
+    letter-spacing: 5px;
+    text-transform: capitalize;
+}
+
+.alignment textarea:focus {
+    width: 85%;
+    background-color: #3b3a40;
+    color: #fff;
+    letter-spacing: 2px;
+    transition-duration: 1s;
+}
+
+.alignment button.next {
+  position: relative;
+  left: 55%;
+  width: 9%;
+  top: 14%;
+  height: 10%;
+  font-size: 17px;
+
+}
+
+.alignmentSelected {
+  -webkit-box-shadow: 0px 0px 11px -4px rgba(255,0,0,1);
+  -moz-box-shadow: 0px 0px 11px -4px rgba(255,0,0,1);
+  box-shadow: 0px 0px 11px -4px rgba(255,0,0,1);
+}
+
+.btn.btn-primary {
+    position: relative;
+    top: -8%;
+    width: 11%;
+    height: 7%;
+    color: #252525 !important;
+    background-color: #fff;
+    border-color: #2e6da4;
+    font-weight: 800 !important;
+    font-size: 1rem !important;
+    transition-duration: 1s;
+}
+
+.btn-primary:hover {
+  background-color: #00ff7f;
+  transition-duration: 1s;
+}
+
+.popup {
+    color: #00ff7f;
+}
+
+.popup:hover {
+    color: #FFF;
+}
+
+
+
+
+.alignment p {
+    position: inherit;
+    left: 1%;
+    top: 2%;
+}
+
+p.hint {
+    position: relative;
+    top: -4%;
+    left: 54%;
+    color: rgb(132, 191, 158);
+}
+
+#advanced-btn {
+  position: relative;
+  top: 14%;
+  left: 31%;
+}
+
+.btnRow {
+    position: relative;
+    left: 13%;
+    margin-bottom: 1%;
+}
+
+.btn-info {
+    color: #FFF;
+    background-color: #4d4d4d;
+    border-color: #00d76b;
+    transition-duration: 1s;
+}
+
+.btn-info:hover {
+    color: #252525;
+    background-color: #00ff7f;
+    border-color: #00d76b;
+    transition-duration: 1s;
+}
+
+.btn--blue {
+    background-color: #00ff7f !important;
+    color: #252525 !important;
+    font-weight: 500 !important;
+}
+
+.btn--blue:hover {
+    background-color: #252525 !important;
+    color: #00ff7f !important;
+    font-weight: 500 !important;
+}
+
+
+#resultParagraph {
+  position: relative;
+  background: #4b4a4a33;
+  width: 70%;
+  left: 3%;
+  top: 22px;
+  height: 32%;
+  overflow: auto;
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  border: solid 1px black;
+  color: #00ff7f;
+word-wrap:break-word
+}
+
+.smenubar .smenubar_alink {
+    background: #00ff7f !important;
+    background-image: -webkit-linear-gradient(top,#3498db,#2980b9);
+    background-image: linear-gradient(180deg,#3498db,#2980b9);
+    border-radius: 4px;
+    font-family: Arial;
+    color: #252525;
+    padding: 3px 10px;
+    margin-left: 10px;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+
+
+
+
+
+
+
+/* END ----------->  ALIGNMENT STYLES */
+
+
+/* DATABASE STYLES */
+
+
+#vue-database form {
+    position: relative;
+    top: 7em;
+    left: 13%;
+}
+
+#vue-database select.db-nav {
+    width: 60%;
+    height: 1.2em;
+    font-size: 2em;
+    letter-spacing: 2px;
+}
+
+#vue-database button {
+    position: relative;
+    margin-top: 2%;
+    left: 23%;
+    height: 3em;
+    width: 15%;
+    border: none;
+}
+
+#vue-database input {
+    position: relative;
+    left: 20%;
+    top: 10%;
+    width: 21%;
+}
+
+.sTerm {
+  position: relative;
+left: -2%;
+top: 49%;
+
+}
+
+.know {
+    width: 2% !important;
+    height: 5% !important;
+    border-radius: 16px;
+    background-color: #84bf9e;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: -39px;
+    margin-left: 39%;
+}
+
+.know a {
+  color: #ffffff;
+text-decoration: none;
+}
+
+#vue-database form p {
+    position: relative;
+    left: 23%;
+}
+
+#vue-database .table {
+    position: relative;
+    width: 84%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    left: 1%;
+    top: 7%;
+    height:500px;
+    overflow: auto;
+}
+
+#vue-database .tableContent {
+  height: 61%;
+overflow-y: scroll;
+width: 93%;
+left: 2%;
+max-width: 100%;
+word-wrap: break-word;
+}
+
+.narrow {
+  width: 60%;
+  overflow: hidden;
+  color: #00FF7F;
+}
+
+.table .table-seq {
+  word-wrap: inherit;
+  max-width: 1130px !important;
+  letter-spacing: 14px;
+  text-align: left;
+  background-color: #252525;
+  color: #00FF7F !important;
+  max-height: 20px !important;
+
+}
+
+.table td {
+  border-top: 6px solid #ddd !important;
+border-right: 6px solid #ddd;
+background: #252525cc;
+color: #FFF;
+
+}
+
+
+/* FULLPAGE JS OVERRIDE STYLES */
+
+.fp-tableCell {
+    vertical-align: top;
+}
+
+.fp-controlArrow.fp-prev, .fp-controlArrow.fp-next {
+    display: none;
+}
+
+
+/*  END ----------> FULLPAGE JS OVERRIDE STYLES */
+
+
+/* LEARN PAGE */
+
+#vue-learn .row {
+    position: relative;
+    left: 6%;
+    margin-top: 3%;
+}
+
+#vue-bio form {
+    position: relative;
+    top: 9em;
+    left: 5%;
+}
+
+#vue-bio select.db-nav {
+    width: 80%;
+    height: 4em;
+}
+
+
+#vue-learn h3 {
+    font-size: 24px;
+    color: white;
+}
+
+#bio-btn {
+    position: relative;
+    left: 43%;
+    top: 20px;
+    border: none;
+    border-radius: 7px;
+    width: 30%;
+    height: 8%;
+    font-size: 2rem;
+}
+
+#cs-btn {
+    position: relative;
+    left: 30%;
+    top: 20px;
+    border: none;
+    border-radius: 7px;
+    width: 43%;
+    height: 7%;
+    font-size: 2rem;
+}
+
+#cs-btn:hover {
+    border: none;
+    border-radius: 7px;
+    background-color: #00ff7f;
+    color: #252525;
+    font-size: 2rem;
+}
+#bio-btn:hover {
+    border: none;
+    border-radius: 7px;
+    background-color: #00ff7f;
+    color: #252525;
+    font-size: 2rem;
+}
+
+
+
+
+#vue-learn .container-fluid {
+    position: relative;
+    top: 7%;
+    left: 3%;
+}
+
+
+
+/* END ----------> LEARN PAGE */
+
+
+/* ABOUT PAGE */
+
+#vue-about p {
+    width: 45%;
+    font-size: 1.4em;
+    letter-spacing: 4px;
+    margin-left: 5%;
+    margin-top: 4%;
+}
+
+h1#logo-about {
+    position: relative;
+    left: 57%;
+    top: -46%;
+    font-size: 32em;
+    color: rgb(132, 191, 158);
+}
+
+.container {
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.text-muted {
+    color: #FFF;
+    max-width: 73%;
+}
+
+.text-primary {
+    color: #00ff7f;
+    font-size: 2rem;
+    letter-spacing: 3px;
+}
+
+.carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
+    display: block;
+    max-width: 100%;
+    height: 250px;
+}
+
+#cap {
+    color: #252525;
+    position: relative;
+    top: 13%;
+    width: 80%;
+    text-align: center;
+    left: 9%;
+    letter-spacing: 3px;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+
+#warning p {
+    position: absolute;
+    top: 2%;
+    left: 45%;
+    font-size: 2rem;
+    width: 30%;
+    text-align: left;
+    font-weight: 700;
+    color: #00ff7f;
+}
