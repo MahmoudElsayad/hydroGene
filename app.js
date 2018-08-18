@@ -158,17 +158,12 @@ var inputSequence = new Vue({
         console.log("Emitted: " + this.seq);
         this.loading = true;
       }
-      else if (this.selected == 'hydroGene Bitwise Alignment') {
-        socket.emit('bitwise.message', this.seq);
-        console.log("Emitted: " + this.seq);
-        this.loading = true;
-      }
       else {
         this.alignmentSelected = true;
         this.warning = true;
         console.log("Emitted: " + "Alignment wasn't chosen");
       }
-      var input = this.seq.split("\n");
+      var input = this.seq.split("*");
       this.seq = input[0];
       this.seq2 = input[1];
     },

@@ -18,21 +18,26 @@
   <link rel="stylesheet" type="text/css" href="assets\css\style.css" />
   <link rel="stylesheet" type="text/css" href="assets\css\popup.css" />
   <link rel="stylesheet" type="text/css" href="assets\css\pushy-buttons.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Righteous|Didact+Gothic" rel="stylesheet">
   <!--CDN links for TweenLite, CSSPlugin, and EasePack-->
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/easing/EasePack.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
-
+  <script src="assets\js\anime.min.js" charset="utf-8"></script>
 </head>
 
 <body>
-  <div id="particle">
-    <h1 id="hydrogeneLogo">hydro<b>GENE</h1>
-      <div id="hydrogenCaption">
-        <h2>Sequence Alignment <br> Ultra Fast Protein Sequence Alignment</h2>
-        <button id="index"><a href="#index.html">Enter</a></button>
+    <div id="particle">
+      <h1 id="hydrogeneLogo">hydro<b>GENE</b></h1>
+      <div id="loopAlternate">
+        <div class="arrow">
+          <h3>v<br> V</h3>
+        </div>
       </div>
-  </div>
+      <div id="hydrogenCaption">
+<h3> <a href="index.html">Enter</a></h3>
+      </div>
+    </div>
 
 
   <!-- <script src="assets\js\app.js"></script> -->
@@ -52,7 +57,7 @@
           }
         },
         "color": {
-          "value": "#ffffff"
+          "value": "#00ff7f"
         },
         "shape": {
           "type": "circle",
@@ -153,6 +158,15 @@
       "retina_detect": true
     };
     particlesJS("particle", options);
+
+
+    var infiniteLoop = anime({
+  targets: '#loopAlternate .arrow',
+  translateY: 500,
+  loop: true,
+  duration: 1800,
+    easing: 'easeInOutSine'
+});
 
   </script>
 

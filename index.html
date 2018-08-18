@@ -37,7 +37,6 @@
           <ul>
             <li id="alignment">Alignment</li>
             <li id="navigation">Navigation</li>
-            <li id="learn">Learn</li>
             <li id="about-us">About</li>
           </ul>
         </div>
@@ -47,7 +46,6 @@
           <div id="unique-heading">
             <h1>Input Sequence</h1>
             <p>Provide the required sequence(s) for alignment or manipulation.</p>
-            <p>{{job}}</p>
           </div>
 
           <div class="container-fluid main alignment">
@@ -58,8 +56,7 @@
               </div>
               <div class="col-md-2">
                 <label for="job">Alignment Algorithm</label>
-                <select v-model="selected" v-bind:class="{alignmentSelected: alignmentSelected}" id="algo" >
-                  <option selected>hydroGene Bitwise Alignment</option>
+                <select v-model="selected" v-bind:class="{alignmentSelected: alignmentSelected}" id="algo">
                   <option>Dynamic Programming Algorithm</option>
                   <option>Word Method Algorithm</option>
                   <option selected>hydroGene Bitwise Alignment Optimized</option>
@@ -74,6 +71,7 @@
             <div v-if="!result && !advanced && !loading">
               <textarea name="sequence" rows="8" cols="80" v-model.trim="seq" placeholder="Enter 2 Sequences separated by a line break" class="text-uppercase"></textarea>
               <p class="hint"><a href="https://en.m.wikipedia.org/wiki/FASTA_format?pw=350&ph=450" class="popup">Don't know what's a FASTA format?</a></p>
+              <p class="hint"><a href="http://www.bioinformatics.org/sms2/random_protein.html?pw=350&ph=450" class="popup">Random Protein Sequence Generator</a></p>
               <button type="button" class="btn btn-primary" v-on:click="expert()">Various Options</button>
               <button class="next btn btn--sm btn--blue" v-on:click="send()">Align</button>
             </div>
@@ -115,7 +113,7 @@
                 <div class=".col-xs-12">
                   <p id="resultParagraph">
                     {{expertResult}}
-                   </p>
+                  </p>
                 </div>
               </div>
 
@@ -136,8 +134,8 @@
                 <select class="db-nav" name="databases" v-model="database">
                                   <option v-for="db in search">{{db}}</option>
                                 </select>
-                                <input type="text" name="" value="" placeholder="Search Terms .. " v-model="terms">
-                                <p class="hint"><a href="https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly?pw=350&ph=450" class="popup sTerm">Don't know what a search term is?</a></p>
+                <input type="text" name="" value="" placeholder="Search Terms .. " v-model="terms">
+                <p class="hint"><a href="https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly?pw=350&ph=450" class="popup sTerm">Don't know what a search term is?</a></p>
                 <p class="know"> <a href="https://en.m.wikipedia.org/wiki/National_Center_for_Biotechnology_Information?pw=350&ph=450" class="popup">?</a></p>
                 <button id="navigation-btn" v-on:click="navigate()">Navigate</button>
               </form>
@@ -170,94 +168,6 @@
                   </template>
                 </tbody>
               </table>
-            </div>
-          </div>
-        </div>
-        <div class="section" id="vue-learn">
-          <div class="slide">
-            <div class="heading">
-              <h1>Learn</h1>
-              <p>Let's learn about Bioinformatics.</p>
-            </div>
-            <div class="container-fluid main">
-              <div class="row">
-                <h3 class="centerd">Choose your skill level</h3>
-                <div class="col-md-5">
-                  <img src="assets\img\Biology.jpg" class="img-responsive" alt="Responsive image">
-                  <button id="bio-btn">Biology</button>
-                </div>
-                <div class="col-md-5">
-                  <img src="assets\img\Cs.jpg" class="img-responsive" alt="Responsive image">
-                  <button id="cs-btn">Computer Science</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slide" data-anchor="bio" id="biology">
-            <div class="heading">
-              <h1>Biology</h1>
-            </div>
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-xs-3">
-                  <img alt="140x140" data-src="assets\img\Sequence.png" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
-                </div>
-                <div class="col-xs-9">
-                  <p class="text-primary text-left">What is a Sequence?</p>
-                  <p class="text-muted text-left"> The precise order of nucleotides within a DNA molecule. It includes any method or technology that is used to determine the order of the four bases—adenine, guanine, cytosine, and thymine—in a strand of DNA.</p>
-                <p> <a href="https://en.m.wikipedia.org/wiki/Sequence_alignment?pw=350&ph=450" class="popup">Read More</a></p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-3">
-                  <img alt="140x140" data-src="assets\img\Genome.png" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
-                </div>
-                <div class="col-xs-9">
-                  <p class="text-primary text-left">What is a Genome?</p>
-                  <p class="text-muted text-left">In modern molecular biology and genetics, a genome is the genetic material of an organism. It consists of DNA (or RNA in RNA viruses).</p>
-                <p> <a href="https://en.m.wikipedia.org/wiki/Genome?pw=350&ph=450" class="popup">Read More</a></p>
-
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-3">
-                  <img alt="140x140" data-src="holder.js/140x140" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
-                </div>
-                <div class="col-xs-9">
-                  <p class="text-primary text-left">What are the Applications of Sequence Alignment</p>
-                  <p class="text-muted text-left">In this video we'll cover a second problem to whet your appetite for things to come, namely the problem of sequence alignment. So this is a fundamental problem in computational genomics.</p>
-                <p> <a href="https://www.coursera.org/learn/algorithms-greedy/lecture/ekVkk/application-sequence-alignment?pw=350&ph=450" class="popup">Read More</a></p>
-
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slide" data-anchor="cs">
-            <div class="heading">
-              <h1>Computer Science</h1>
-            </div>
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-xs-3">
-                  <img alt="140x140" data-src="assets\img\Needle.png" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
-                </div>
-                <div class="col-xs-9">
-                  <p class="text-primary text-left">Needleman-Wunch Algorithm</p>
-                  <p class="text-muted text-left"> The Needleman–Wunsch algorithm is an algorithm used in bioinformatics to align protein or nucleotide sequences. It was one of the first applications of dynamic programming to compare biological sequences.</p>
-                <p> <a href="https://en.m.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm?pw=350&ph=450" class="popup">Read More</a></p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-3">
-                  <img alt="140x140" data-src="assets\img\mas.gif" class="img-thumbnail" style="width: 100px; height: 100px;" src="" data-holder-rendered="true">
-                </div>
-                <div class="col-xs-9">
-                  <p class="text-primary text-left">Word Method Alignment</p>
-                  <p class="text-muted text-left">Word methods, also known as k-tuple methods, are heuristic methods that are not guaranteed to find an optimal alignment solution, but are significantly more efficient than dynamic programming.</p>
-                <p> <a href="https://en.m.wikipedia.org/wiki/Sequence_alignment?pw=350&ph=450" class="popup">Read More</a></p>
-
-                </div>
-              </div>
             </div>
           </div>
         </div>

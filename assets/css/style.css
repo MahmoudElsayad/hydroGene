@@ -15,35 +15,51 @@ textarea {
 }
 
 
+#particle {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#141b2a+0,2a3856+0,141b2b+73,151c2f+83,151c2d+89,141b2b+100 */
+  background: #141b2a; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #141b2a 0%, #2a3856 0%, #141b2b 73%, #151c2f 83%, #151c2d 89%, #141b2b 100%); /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, #141b2a 0%,#2a3856 0%,#141b2b 73%,#151c2f 83%,#151c2d 89%,#141b2b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, #141b2a 0%,#2a3856 0%,#141b2b 73%,#151c2f 83%,#151c2d 89%,#141b2b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#141b2a', endColorstr='#141b2b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */}
+
 
 
 
 #hydrogeneLogo {
+
+
+    font-family: 'Righteous';
+text-shadow: -1px -1px 3px rgba(0, 0, 0, 0.30);
+    color: #00ff7f;
     position: relative;
     top: 40%;
-    left: 29%;
     font-size: 7rem;
-    background: #252525;
     text-align: center;
-    width: 38%;
 }
 
-#hydrogeneLogo:hover {
-    background: #00ff7f;
-    width: 38%;
-    height: 13%;
-    top: 37%;
-    color: #252525;
+#hydrogeneLogo b {
+  color:#fff;
+}
+.arrow h3 {
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    color: #c5c3c3;
+    font-weight: 100;
+
 }
 
 #hydrogenCaption {
     position: absolute;
-    top: 55%;
+    top: 88%;
     text-align: center;
-    left: 31%;
+    left: 48%;
     color: white;
-  }
-
+    font-family: Didact Gothic;
+    font-size: 7px;
+    text-transform: uppercase;
+}
   #hydrogenCaption h2 {
     font-size: 2rem;
     line-height: 27px;
@@ -76,7 +92,7 @@ textarea {
 }
 
 .left-col {
-  height: 102%;
+  height: 105%;
 background-color: rgb(255, 255, 255);
 margin-top: -2%;
 
@@ -118,14 +134,15 @@ max-width: 100%;
 }
 
 .nav li:hover {
+
     color: #00ff7f;
     transition-duration: 1s;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
     cursor: pointer;
-    transform: scale(1.2);
     background-color: #252525;
     padding: 5px;
+
 }
 
 .heading {
@@ -190,6 +207,7 @@ input:focus , select:focus {
     transition-duration: 1s;
     letter-spacing: 5px;
     text-transform: capitalize;
+    font-size: x-small;
 }
 
 .alignment textarea:focus {
@@ -204,7 +222,7 @@ input:focus , select:focus {
   position: relative;
   left: 55%;
   width: 9%;
-  top: 14%;
+  top: 12%;
   height: 10%;
   font-size: 17px;
 
