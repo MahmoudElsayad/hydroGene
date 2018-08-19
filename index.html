@@ -69,7 +69,7 @@
 
             </div>
             <div v-if="!result && !advanced && !loading">
-              <textarea name="sequence" rows="8" cols="80" v-model.trim="seq" placeholder="Enter 2 Sequences separated by a line break" class="text-uppercase"></textarea>
+              <textarea name="sequence" rows="8" cols="80" v-model.trim="seq" placeholder="Enter 2 Sequences separated by an asterisk '*'" class="text-uppercase"></textarea>
               <p class="hint"><a href="https://en.m.wikipedia.org/wiki/FASTA_format?pw=350&ph=450" class="popup">Don't know what's a FASTA format?</a></p>
               <p class="hint"><a href="http://www.bioinformatics.org/sms2/random_protein.html?pw=350&ph=450" class="popup">Random Protein Sequence Generator</a></p>
               <button type="button" class="btn btn-primary" v-on:click="expert()">Various Options</button>
